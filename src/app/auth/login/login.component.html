@@ -1,0 +1,64 @@
+<div class="container">
+  <img class="m-auto is-block p-6" src="/yunuki-logo.png" alt="Yunuki logo" />
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="box">
+    <div class="field">
+      <label for="username" class="label">Nombre de usuario</label>
+      <div class="control">
+        <input
+          id="username"
+          name="username"
+          type="text"
+          class="input"
+          placeholder="Introduce tu nombre de usuario"
+          required
+          ngModel
+          #username="ngModel"
+          [class.is-danger]="username.invalid && username.touched"
+        />
+      </div>
+      @if (username.invalid && username.touched) {
+      <p class="help is-danger">El nombre es obligatorio.</p>
+      } @else if (username.valid && username.touched) {
+      <p class="help is-success">Campo válido.</p>
+      }
+    </div>
+    <div class="field">
+      <label for="password" class="label">Contraseña</label>
+      <div class="control">
+        <input
+          id="password"
+          name="password"
+          type="password"
+          class="input"
+          placeholder="Introduce tu contraseña"
+          required
+          ngModel
+          #password="ngModel"
+          [class.is-danger]="password.invalid && password.touched"
+        />
+      </div>
+      @if (password.invalid && password.touched) {
+      <p class="help is-danger">La contraseña es obligatoria.</p>
+      } @else if (password.valid && password.touched) {
+      <p class="help is-success">Campo válido.</p>
+      }
+    </div>
+    <div class="field">
+      <div class="control">
+        <button
+          type="submit"
+          class="button is-primary"
+          [disabled]="loginForm.invalid"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="mt-6 is-flex is-justify-content-center is-align-items-center">
+    <p class="mr-4">¿Aún no tienes cuenta?</p>
+    <button type="button" class="button is-info" routerLink="/register">
+      Registrarse
+    </button>
+  </div>
+</div>
