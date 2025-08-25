@@ -13,13 +13,12 @@
           required
           ngModel
           #username="ngModel"
+          (input)="clearError()"
           [class.is-danger]="username.invalid && username.touched"
         />
       </div>
       @if (username.invalid && username.touched) {
       <p class="help is-danger">El nombre es obligatorio.</p>
-      } @else if (username.valid && username.touched) {
-      <p class="help is-success">Campo válido.</p>
       }
     </div>
     <div class="field">
@@ -34,15 +33,17 @@
           required
           ngModel
           #password="ngModel"
+          (input)="clearError()"
           [class.is-danger]="password.invalid && password.touched"
         />
       </div>
       @if (password.invalid && password.touched) {
       <p class="help is-danger">La contraseña es obligatoria.</p>
-      } @else if (password.valid && password.touched) {
-      <p class="help is-success">Campo válido.</p>
       }
     </div>
+    @if (error) {
+    <p class="help is-danger">{{ error }}</p>
+    }
     <div class="field">
       <div class="control">
         <button
