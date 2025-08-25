@@ -1,1 +1,86 @@
-<p>register works!</p>
+<div class="container">
+  <img class="m-auto is-block p-6" src="/yunuki-logo.png" alt="logo Yunuki" />
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="box">
+    <div class="field">
+      <label for="username" class="label">Nombre de usuario</label>
+      <div class="control">
+        <input
+          id="username"
+          name="username"
+          type="text"
+          class="input"
+          placeholder="Introduce tu nombre de usuario"
+          required
+          ngModel
+          #username="ngModel"
+          (input)="clearError()"
+          [class.is-danger]="username.invalid && username.touched"
+        />
+      </div>
+      @if (username.invalid && username.touched) {
+      <p class="help is-danger">El nombre es obligatorio.</p>
+      }
+    </div>
+    <div class="field">
+      <label for="email" class="label">Email</label>
+      <div class="control">
+        <input
+          id="email"
+          name="email"
+          type="text"
+          class="input"
+          placeholder="Introduce tu email"
+          required
+          ngModel
+          #email="ngModel"
+          (input)="clearError()"
+          [class.is-danger]="email.invalid && email.touched"
+        />
+      </div>
+      @if (email.invalid && email.touched) {
+      <p class="help is-danger">El email es obligatorio.</p>
+      } @if (errorEmail) {
+      <p class="help is-danger">{{ errorEmail }}</p>
+      }
+    </div>
+    <div class="field">
+      <label for="password" class="label">Contraseña</label>
+      <div class="control">
+        <input
+          id="password"
+          name="password"
+          type="password"
+          class="input"
+          placeholder="Introduce tu contraseña"
+          required
+          ngModel
+          #password="ngModel"
+          (input)="clearError()"
+          [class.is-danger]="password.invalid && password.touched"
+        />
+      </div>
+      @if (password.invalid && password.touched) {
+      <p class="help is-danger">La contraseña es obligatoria.</p>
+      } @if (errorPassword) {
+      <p class="help is-danger">{{ errorPassword }}</p>
+      }
+    </div>
+    @if (error) {
+    <p class="help is-danger">{{ error }}</p>
+    }
+    <div class="field">
+      <div class="control">
+        <button
+          type="submit"
+          class="button is-info"
+          [disabled]="loginForm.invalid"
+        >
+          Registrarse
+        </button>
+      </div>
+    </div>
+    <div class="has-text-centered">
+      <a href="/login">Volver a Inicio</a>
+    </div>
+  </form>
+</div>

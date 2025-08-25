@@ -13,12 +13,12 @@ export interface LoginResponse {
 })
 
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:3000/auth';
+  private readonly apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string) {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(tap(res => {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, { username, password }).pipe(tap(res => {
       localStorage.setItem('access_token', res.access_token);
     }),
       catchError(error => {
@@ -28,6 +28,36 @@ export class AuthService {
         }
         return throwError(() => new Error(message));
       }))
+  }
+
+  register(username: string, email: string, password: string) {
+    return this.http.post(`${this.apiUrl}/users/register`, { username, email, password }).pipe(
+      tap(() => {
+        this.router.navigate(['/auth/login']);
+      }),
+      catchError(error => {
+        let message = '';
+        if (error.status === 409) {
+          message = error.error.message || 'Error desconocido';
+          return throwError(() => new Error(message));
+        } else if (error.status === 400) {
+          if (Array.isArray(error.error.message)) {
+            const errors = error.error.message;
+            const fieldErrors: any = {};
+            errors.forEach((err: string) => {
+              if (err.includes('correo')) {
+                fieldErrors.email = err;
+              }
+              if (err.includes('contraseña')) {
+                fieldErrors.password = err;
+              }
+            });
+            return throwError(() => fieldErrors);
+          }
+        }
+        return throwError(() => new Error(message));
+      })
+    );
   }
 
   logout(): void {
