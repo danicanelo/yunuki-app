@@ -7,7 +7,7 @@ import { CemeteryComponent } from './cemetery/cemetery.component';
 
 export const routes: Routes = [
   {
-    path: '', component: YunukiPageComponent
+    path: 'yunuki', component: YunukiPageComponent
   },
   {
     path: 'login', component: LoginComponent
@@ -19,9 +19,9 @@ export const routes: Routes = [
     path: 'create', component: CreateYunukiComponent
   },
   {
-    path: '**', component: YunukiPageComponent
+    path: 'cemetery', component: CemeteryComponent
   },
   {
-    path: 'cemetery', component: CemeteryComponent
+    path: '**', redirectTo: 'login', pathMatch: 'full'
   },
 ];
