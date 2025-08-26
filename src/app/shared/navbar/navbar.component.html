@@ -1,0 +1,40 @@
+<nav
+  class="navbar is-white has-shadow"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://localhost:3001/">
+      <img src="/yunuki-logo.png" width="112" height="28" />
+    </a>
+    <a
+      role="button"
+      class="navbar-burger"
+      [class.si-active]="isActive"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+      (click)="handleActive()"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu" [class.is-active]="isActive">
+    <div class="navbar-start"></div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        @if(showYunukiLink){
+        <a routerLink="['/yunuki']" class="mr-6"></a>
+        } @if(showCemeteryLink){
+        <a routerLink="['/cemetery']" class="mr-6"></a>
+        }
+        <p class="mr-3 has-text-weight-semibold">{{ username }}</p>
+        <div class="buttons">
+          <a class="button is-info" (click)="logout()"> Cerrar Sesión </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

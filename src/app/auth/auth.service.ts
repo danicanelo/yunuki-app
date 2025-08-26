@@ -1,11 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 
 export interface LoginResponse {
   access_token: string;
+}
+
+export interface User {
+  id: number;
+  username: string;
+  email?: string;
 }
 
 @Injectable({
@@ -16,6 +22,26 @@ export class AuthService {
   private readonly apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  getUser(): Observable<User> {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      return throwError(() => new Error('No token found'));
+    }
+    return this.http.get<User>(`${this.apiUrl}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).pipe(
+      catchError(error => {
+        if (error.status === 401) {
+          this.logout();
+          return throwError(() => new Error('No autorizado'));
+        }
+        return throwError(() => new Error('Error al obtener el usuario'));
+      })
+    )
+  }
 
   login(username: string, password: string) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, { username, password }).pipe(tap(res => {
