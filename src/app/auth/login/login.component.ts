@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { NavbarComponent } from "../../shared/navbar/navbar.component";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink, NavbarComponent],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -31,7 +30,7 @@ export class LoginComponent {
         next: (response) => {
           this.loading = false;
           console.log('Éxito', response.access_token);
-          this.router.navigate(['/yunuki']);
+          this.router.navigate(['/create']);
         },
         error: (err) => {
           this.loading = false;

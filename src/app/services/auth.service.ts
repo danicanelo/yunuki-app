@@ -95,4 +95,8 @@ export class AuthService {
     const token = localStorage.getItem('access_token');
     return !!token;
   }
+
+  getToken(): string {
+    return localStorage.getItem('access_token') || '';
+  }
 }
