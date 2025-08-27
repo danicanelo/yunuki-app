@@ -1,0 +1,48 @@
+<div>
+  <app-navbar></app-navbar>
+  <div class="section">
+    <div class="container">
+      <div class="box">
+        <p class="title has-text-centered">¡Hola, {{ username }}!</p>
+        <p class="subtitle has-text-centered">Crea tu Yunuki a continuación</p>
+        <form (ngSubmit)="handleSubmit()">
+          <input
+            type="text"
+            class="input"
+            id="yunukiName"
+            name="yunukiName"
+            placeholder="Introduce un nombre para tu Yunuki"
+            [(ngModel)]="createValues.yunukiName"
+            (input)="handleChange($event)"
+            required
+          />
+          <div class="field mt-5">
+            <label class="label" for="breed"> Tipo de yunuki </label>
+            <div class="select">
+              <select
+                name="breed"
+                id="breed"
+                [(ngModel)]="createValues.breed"
+                (change)="handleChange($event)"
+              >
+                @for (breed of breeds; track $index) {
+                <option [value]="breed.id">{{ breed.name }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          @if (breeds[selectedBreed]) {
+          <article class="message is-primary">
+            <div class="message-body">{{ breeds[selectedBreed].info }}</div>
+          </article>
+          }
+
+          <button type="submit" class="button is-success mt-2">
+            ¡Crear Yunuki!
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
