@@ -1,1 +1,148 @@
-<p>yunuki-page works!</p>
+<div>
+  <div class="modal" [ngClass]="{ 'is-active': modalOpen }">
+    <div (click)="toggleModal()" class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p class="has-text-centered">¡{{ yunuki.name }} {{ action }}!</p>
+      </div>
+    </div>
+  </div>
+  <app-navbar></app-navbar>
+  @if (!yunuki) {
+  <div class="section">
+    <div class="container">
+      <div class="box">
+        <p class="has-text-centered">Cargando...</p>
+      </div>
+    </div>
+  </div>
+  } @if (yunuki) {
+  <div class="hero">
+    <div class="columns">
+      <div class="aside-background column is-one-quarter p-6">
+        <div class="box">
+          <p class="title">{{ yunuki.name }}</p>
+          <p>Tipo: {{ yunuki.breed.name }}</p>
+        </div>
+        <div>
+          <div class="field">
+            <label for="" class="label">Hambre</label>
+            <progress
+              class="progress is-primary"
+              [value]="yunuki.hunger"
+              max="10"
+            >
+              {{ yunuki.hunger }}
+            </progress>
+          </div>
+          <div class="field">
+            <label for="" class="label">Suciedad</label>
+            <progress
+              class="progress is-primary"
+              [value]="yunuki.dirt"
+              max="10"
+            >
+              {{ yunuki.dirt }}
+            </progress>
+          </div>
+          <div class="field">
+            <label for="" class="label">Sueño</label>
+            <progress
+              class="progress is-primary"
+              [value]="yunuki.tiredness"
+              max="10"
+            >
+              {{ yunuki.tiredness }}
+            </progress>
+          </div>
+        </div>
+        <div class="box mt-5">
+          <p class="title is-5">¿Cómo funciona?</p>
+          <p>
+            Las barras muestran el nivel de hambre, suciedad y sueño de
+            {{ yunuki.name }}. Si alguna llega a su tope fallecerá ¡Trata de no
+            olvidarte de sus necesidades!
+          </p>
+        </div>
+      </div>
+      <div
+        class="is-fullheight column hero is-flex-direction-column is-justify-content-space-evenly"
+      >
+        <!-- Aquí el yunuki (crear componente) -->
+        <div class="is-flex is-justify-content-center">
+          <button class="button is-info mx-2" (click)="feedYunuki()">
+            <span class="icon">
+              <img src="/food.svg" alt="Dormir" width="16" height="16" />
+            </span>
+            <span>Alimentar</span>
+          </button>
+          <button class="button is-info mx-2" (click)="cleanYunuki()">
+            <span class="icon">
+              <img src="/bath.svg" alt="Dormir" width="16" height="16" />
+            </span>
+            <span>Limpiar</span>
+          </button>
+          <button class="button is-info mx-2" (click)="sleepYunuki()">
+            <span class="icon">
+              <img src="/sleep.svg" alt="Dormir" width="16" height="16" />
+            </span>
+            <span>Dormir</span>
+          </button>
+          <!-- <button
+                class="button is-info mx-2"
+                onClick={() => {
+                  if (yunuki.hunger === 0) {
+                    setAction("no tiene hambre");
+                  } else if (yunuki.hunger > 0) {
+                    setAction("ha comido");
+                  }
+                  feedYunuki();
+                  toggleModal();
+                }}
+              >
+                <img class="fa-personal-icon" src={foodLogo} />
+                Alimentar
+              </button>
+
+              <button
+                class="button is-info mx-2"
+                onClick={() => {
+                  if (yunuki.dirt === 0) {
+                    setAction("no necesita bañarse");
+                  } else if (yunuki.dirt > 0) {
+                    setAction("se ha dado un baño");
+                  }
+                  cleanYunuki();
+                  toggleModal();
+                }}
+              >
+                <img class="fa-personal-icon" src={bathLogo} />
+                Limpiar
+              </button>
+              <button
+                class="button is-info mx-2"
+                onClick={() => {
+                  if (yunuki.tiredness === 0) {
+                    setAction("no necesita dormir");
+                  } else if (yunuki.tiredness > 0) {
+                    setAction("ha descansado");
+                  }
+                  sleepYunuki();
+                  toggleModal();
+                }}
+              >
+                <img class="fa-personal-icon" src={sleepLogo} />
+                Dormir
+              </button> -->
+          <!-- <Modal
+            isOpen="{modal}"
+            onClose="{toggleModal}"
+            yunukiName="{yunuki.name}"
+            action="{action}"
+          /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
