@@ -4,11 +4,12 @@ import { AuthService } from '../../services/auth.service';
 import { YunukiService } from '../../services/yunuki.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { YunukiComponent } from './yunuki/yunuki.component';
 
 @Component({
   selector: 'app-yunuki-page',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, YunukiComponent],
   templateUrl: './yunuki-page.component.html',
   styleUrl: './yunuki-page.component.css'
 })
