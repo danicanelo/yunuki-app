@@ -20,9 +20,17 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/yunuki']);
-    }
+    this.authService.getUser().subscribe({
+      next: (user: any) => {
+        user.yunukis.forEach((yunuki: any) => {
+          if (yunuki.dead === null || yunuki.dead === undefined) {
+            this.router.navigate(['/yunuki']);
+          } else {
+            this.router.navigate(['/create']);
+          }
+        });
+      }
+    })
   }
 
   onSubmit(form: any) {
