@@ -2,27 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-
-export interface Breed {
-  id: number;
-  name: string;
-  info: string;
-  // hungerPoints: number;
-  // dirtPoints: number;
-  // tirednessPoints: number;
-}
-
-export interface Yunuki {
-  id: number;
-  name: string;
-  breed: Breed;
-  dead: Date | null;
-  // birth: Date;
-  // hunger: number;
-  // dirt: number;
-  // tiredness: number;
-  // userId: number;
-}
+import { Breed } from '../interfaces/breed.interface';
+import { Yunuki } from '../interfaces/yunuki.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../interfaces/user.interface';
+import { Yunuki } from '../../interfaces/yunuki.interface';
+
 
 @Component({
   selector: 'app-login',
@@ -21,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe({
-      next: (user: any) => {
-        user.yunukis.forEach((yunuki: any) => {
+      next: (user: User) => {
+        user.yunukis?.forEach((yunuki: Yunuki) => {
           if (yunuki.dead === null || yunuki.dead === undefined) {
             this.router.navigate(['/yunuki']);
           } else {

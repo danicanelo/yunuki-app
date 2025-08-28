@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { YunukiService } from '../../services/yunuki.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Breed } from '../../interfaces/breed.interface';
+import { Yunuki } from '../../interfaces/yunuki.interface';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-create-yunuki',
@@ -14,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class CreateYunukiComponent implements OnInit {
   username = '';
-  breeds: any[] = [];
+  breeds: Breed[] = [];
   selectedBreed = 0;
   createValues = {
     yunukiName: '',
@@ -24,9 +27,9 @@ export class CreateYunukiComponent implements OnInit {
   constructor(private authService: AuthService, private yunukiService: YunukiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe((user: any) => {
+    this.authService.getUser().subscribe((user: User) => {
       this.username = user.username;
-      user.yunukis.forEach((yunuki: any) => {
+      user.yunukis?.forEach((yunuki: Yunuki) => {
         if (!yunuki.dead) {
           this.router.navigate(['/yunuki']);
         }

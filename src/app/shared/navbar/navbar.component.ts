@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService, User } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { filter } from 'rxjs';
+import { User } from '../../interfaces/user.interface';
+import { Yunuki } from '../../interfaces/yunuki.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +30,7 @@ export class NavbarComponent implements OnInit {
     this.authService.getUser().subscribe({
       next: (user: User) => {
         this.username = user.username;
-        this.hasDeadYunukis = user.yunukis?.some((yunuki: any) => yunuki.dead !== null && yunuki.dead !== undefined) ?? false;
+        this.hasDeadYunukis = user.yunukis?.some((yunuki: Yunuki) => yunuki.dead !== null && yunuki.dead !== undefined) ?? false;
       },
       error: (err) => {
         console.error('Error obteniendo el usuario:', err);

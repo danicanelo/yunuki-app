@@ -5,6 +5,7 @@ import { YunukiService } from '../../services/yunuki.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { YunukiComponent } from './yunuki/yunuki.component';
+import { Yunuki } from '../../interfaces/yunuki.interface';
 
 @Component({
   selector: 'app-yunuki-page',
@@ -14,7 +15,7 @@ import { YunukiComponent } from './yunuki/yunuki.component';
   styleUrl: './yunuki-page.component.css'
 })
 export class YunukiPageComponent implements OnInit, OnDestroy {
-  yunuki: any = null;
+  yunuki!: Yunuki;
   fetchInterval: any = null;
   modalOpen = false;
   action = '';

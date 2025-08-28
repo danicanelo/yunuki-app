@@ -2,17 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { User } from '../interfaces/user.interface';
+
 
 
 export interface LoginResponse {
   access_token: string;
-}
-
-export interface User {
-  id: number;
-  username: string;
-  email?: string;
-  yunukis?: [];
 }
 
 @Injectable({

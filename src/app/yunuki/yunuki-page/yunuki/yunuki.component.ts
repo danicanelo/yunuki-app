@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Yunuki } from '../../../services/yunuki.service';
+import { Yunuki } from '../../../interfaces/yunuki.interface';
 
 @Component({
   selector: 'app-yunuki',
@@ -10,7 +10,7 @@ import { Yunuki } from '../../../services/yunuki.service';
   styleUrl: './yunuki.component.css'
 })
 export class YunukiComponent {
-  @Input() yunuki: any;
+  @Input() yunuki!: Yunuki;
 
   isHungry() {
     return this.yunuki.hunger >= 2;
@@ -24,7 +24,7 @@ export class YunukiComponent {
     return this.yunuki.tiredness >= 5;
   }
 
-  yunukiSmall(yunuki: any, date: Date) {
+  yunukiSmall(yunuki: Yunuki, date: Date) {
     const diff = date.getTime() - new Date(yunuki.birth).getTime();
     const days = diff / (1000 * 60 * 60 * 24);
     if (days < 1) {
@@ -34,7 +34,7 @@ export class YunukiComponent {
     }
   }
 
-  yunukiMid(yunuki: any, date: Date) {
+  yunukiMid(yunuki: Yunuki, date: Date) {
     const diff = date.getTime() - new Date(yunuki.birth).getTime();
     const days = diff / (1000 * 60 * 60 * 24);
     if (days >= 1 && days < 2) {
