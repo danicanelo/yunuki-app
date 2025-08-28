@@ -1,0 +1,16 @@
+.pray {
+  background-image: url("/paper-texture.jpg");
+  background-color: rgba(250, 245, 146, 0.651);
+  background-blend-mode: overlay;
+  padding: 30px;
+  border-radius: 10px;
+  font-family: "Dancing Script", cursive;
+  color: #555;
+  line-height: 1.5;
+  width: fit-content;
+  font-size: 2em;
+}
+
+.pray p {
+  padding: 10px;
+}

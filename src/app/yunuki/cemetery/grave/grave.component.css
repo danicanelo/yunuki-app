@@ -1,0 +1,45 @@
+.grave {
+  width: fit-content;
+  height: fit-content;
+  background-color: #585858;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.name {
+  font-family: "dancing script", cursive;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+
+.detail {
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+}
+
+.date {
+  margin-top: 5px;
+}
+
+.date span {
+  font-weight: bold;
+}
+
+.epitaph {
+  width: 150px;
+  padding: 10px 0 10px 0;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+}
+
+.rip {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1em;
+}

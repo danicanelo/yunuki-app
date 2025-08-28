@@ -1,1 +1,33 @@
-<p>cemetery works!</p>
+<div>
+  <app-navbar></app-navbar>
+  <div class="section">
+    <div class="columns">
+      <div class="column is-one-third">
+        <div class="box p-5">
+          <p class="title is-5">Cementerio de yunukis</p>
+          <p>
+            Este es tu cementerio de Yunukis. Aquí podrás visitar las tumbas de
+            tus yunukis fallecidos.
+          </p>
+        </div>
+        <div class="pray">
+          <p>Descansad en paz, pequeños bichos de píxeles</p>
+          <p>vencidos por el hambre, el cansancio o el sueño.</p>
+          <p>Fuisteis fieles, torpes, adorables y efímeros.</p>
+          <p>Y no hicistéis más que moveros</p>
+          <p>de un lado a otro.</p>
+        </div>
+      </div>
+      <div class="columns column is-flex-wrap-wrap is-justify-content-center">
+        @for (deadYunuki of deadYunukis; track $index) {
+        <app-grave
+          [name]="deadYunuki.name"
+          [birthDate]="deadYunuki.birth"
+          [deadDate]="deadYunuki.dead"
+          [epitaph]="deadYunuki.epitaph"
+        ></app-grave>
+        }
+      </div>
+    </div>
+  </div>
+</div>

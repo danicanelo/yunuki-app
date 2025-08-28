@@ -26,9 +26,9 @@
     <div class="navbar-end">
       <div class="navbar-item">
         @if(showYunukiLink){
-        <a routerLink="['/yunuki']" class="mr-6"></a>
+        <a (click)="goToYunukiPage()" class="mr-6">Volver a tu yunuki</a>
         } @if(showCemeteryLink){
-        <a routerLink="['/cemetery']" class="mr-6"></a>
+        <a (click)="goToCemeteryPage()" class="mr-6">Ir al cementerio</a>
         }
         <p class="mr-3 has-text-weight-semibold">{{ username }}</p>
         <div class="buttons">
