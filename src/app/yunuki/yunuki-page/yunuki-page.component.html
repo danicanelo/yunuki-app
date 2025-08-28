@@ -3,7 +3,9 @@
     <div (click)="toggleModal()" class="modal-background"></div>
     <div class="modal-content">
       <div class="box">
-        <p class="has-text-centered">¡{{ yunuki.name }} {{ action }}!</p>
+        <p class="has-text-centered is-size-4">
+          ¡{{ yunuki.name }} {{ action }}!
+        </p>
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@
             </progress>
           </div>
           <div class="field">
-            <label for="" class="label">Sueño</label>
+            <label for="" class="label">Cansancio</label>
             <progress
               class="progress is-primary"
               [value]="yunuki.tiredness"
@@ -59,7 +61,7 @@
         <div class="box mt-5">
           <p class="title is-5">¿Cómo funciona?</p>
           <p>
-            Las barras muestran el nivel de hambre, suciedad y sueño de
+            Las barras muestran el nivel de hambre, suciedad y cansancio de
             {{ yunuki.name }}. Si alguna llega a su tope fallecerá ¡Trata de no
             olvidarte de sus necesidades!
           </p>
