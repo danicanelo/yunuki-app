@@ -1,27 +1,35 @@
-# YunukiFront
+# 🐾 Yunuki - Virtual Pet
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+Yunuki is a Tamagotchi-style virtual pet web app where you can adopt, care for, and watch your pet grow through different life stages.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📋 Overview
 
-## Code scaffolding
+- 🔐 **User Auth**: Register and login to keep track of your pets
+- 🎯 **One Pet at a Time**: Care for one Yunuki at a time
+- 🐣 **Pet Types**: Choose from Yanaka, Yonoko, or Yiniki - each with unique stats
+- 📈 **Life Stages**: Baby → Teen → Adult (full lifecycle ~1 month)
+- 🍽️ **Basic Needs**: Feed, clean, and put your pet to sleep
+- ⚰️ **Pet Cemetery**: View tombstones of deceased pets with epitaphs
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🚀 Quick Start
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1.  Download this repo + the API repo (https://github.com/danicanelo/yunuki-api)
+2.  Install dependencies:
 
-## Running unit tests
+    `npm install`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3.  Start the app:
 
-## Running end-to-end tests
+    `npm run start`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🛠️ Tech Stack
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Frontend: Angular
+- Backend: NestJS + TypeORM
+- Database: MySQL
