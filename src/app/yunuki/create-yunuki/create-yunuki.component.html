@@ -31,12 +31,24 @@
               </select>
             </div>
           </div>
-
-          @if (breeds[selectedBreed]) {
-          <article class="message is-primary">
-            <div class="message-body">{{ breeds[selectedBreed].info }}</div>
-          </article>
-          }
+          <div>
+            @if (breeds[selectedBreed].name === 'Yanaka') {
+            <article class="message is-primary">
+              <div class="message-body">{{ breeds[selectedBreed].info }}</div>
+              <img class="p-5" src="/yanaka.png" width="150" />
+            </article>
+            } @if (breeds[selectedBreed].name === 'Yonoko') {
+            <article class="message is-primary">
+              <div class="message-body">{{ breeds[selectedBreed].info }}</div>
+              <img class="p-5" src="/yonoko.png" width="150" />
+            </article>
+            } @if (breeds[selectedBreed].name === 'Yiniki') {
+            <article class="message is-primary">
+              <div class="message-body">{{ breeds[selectedBreed].info }}</div>
+              <img class="p-5" src="/yiniki.png" width="150" />
+            </article>
+            }
+          </div>
 
           <button type="submit" class="button is-success mt-2">
             ¡Crear Yunuki!

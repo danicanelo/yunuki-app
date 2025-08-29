@@ -33,6 +33,10 @@
               class="progress is-primary"
               [value]="yunuki.hunger"
               max="10"
+              [ngClass]="{
+                'is-danger': yunuki.hunger >= 7,
+                'progress-bar-bounce': yunuki.hunger >= 7,
+              }"
             >
               {{ yunuki.hunger }}
             </progress>
@@ -43,6 +47,10 @@
               class="progress is-primary"
               [value]="yunuki.dirt"
               max="10"
+              [ngClass]="{
+                'is-danger': yunuki.dirt >= 7,
+                'progress-bar-bounce': yunuki.dirt >= 7,
+              }"
             >
               {{ yunuki.dirt }}
             </progress>
@@ -53,6 +61,10 @@
               class="progress is-primary"
               [value]="yunuki.tiredness"
               max="10"
+              [ngClass]="{
+                'is-danger': yunuki.tiredness >= 7,
+                'progress-bar-bounce': yunuki.tiredness >= 7,
+              }"
             >
               {{ yunuki.tiredness }}
             </progress>
@@ -70,24 +82,35 @@
       <div
         class="is-fullheight column hero is-flex-direction-column is-justify-content-space-evenly"
       >
-        <!-- Aquí el yunuki (crear componente) -->
         <app-yunuki [yunuki]="yunuki"></app-yunuki>
         <div class="is-flex is-justify-content-center">
           <button class="button is-info mx-2" (click)="feedYunuki()">
             <span class="icon">
-              <img src="/food.svg" alt="Dormir" width="16" height="16" />
+              <i
+                class="fa-solid fa-bowl-food fa-bounce"
+                style="color: #ffffff"
+                [ngClass]="{ 'fa-bounce': yunuki.hunger >= 5 }"
+              ></i>
             </span>
             <span>Alimentar</span>
           </button>
           <button class="button is-info mx-2" (click)="cleanYunuki()">
             <span class="icon">
-              <img src="/bath.svg" alt="Dormir" width="16" height="16" />
+              <i
+                class="fa-solid fa-shower"
+                style="color: #ffffff"
+                [ngClass]="{ 'fa-bounce': yunuki.dirt >= 5 }"
+              ></i>
             </span>
             <span>Limpiar</span>
           </button>
           <button class="button is-info mx-2" (click)="sleepYunuki()">
             <span class="icon">
-              <img src="/sleep.svg" alt="Dormir" width="16" height="16" />
+              <i
+                class="fa-solid fa-moon"
+                style="color: #ffffff"
+                [ngClass]="{ 'fa-bounce': yunuki.tiredness >= 5 }"
+              ></i>
             </span>
             <span>Dormir</span>
           </button>
