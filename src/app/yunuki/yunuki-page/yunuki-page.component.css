@@ -1,0 +1,26 @@
+button {
+  width: fit-content;
+}
+
+button span {
+  color: white;
+}
+
+button span i {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.progress-bar-bounce {
+  animation: bounce 0.5s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
