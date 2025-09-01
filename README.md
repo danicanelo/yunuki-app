@@ -9,7 +9,7 @@ Yunuki is a Tamagotchi-style virtual pet web app where you can adopt, care for, 
 - 🔐 **User Auth**: Register and login to keep track of your pets
 - 🎯 **One Pet at a Time**: Care for one Yunuki at a time
 - 🐣 **Pet Types**: Choose from Yanaka, Yonoko, or Yiniki - each with unique stats
-- 📈 **Life Stages**: Baby → Teen → Adult (full lifecycle ~1 month)
+- 📈 **Life Stages**: Baby → Teen → Adult (full lifecycle ~1 week)
 - 🍽️ **Basic Needs**: Feed, clean, and put your pet to sleep
 - ⚰️ **Pet Cemetery**: View tombstones of deceased pets with epitaphs
 
