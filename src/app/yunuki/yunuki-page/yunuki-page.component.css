@@ -24,3 +24,21 @@ button span i {
     transform: scale(1.1);
   }
 }
+
+.yunuki-container {
+  min-height: 100vh;
+}
+
+app-yunuki {
+  margin-bottom: 0px;
+}
+
+@media screen and (max-width: 1024px) {
+  app-yunuki {
+    margin-bottom: 80px;
+  }
+
+  .yunuki-container {
+    min-height: 0px !important;
+  }
+}
