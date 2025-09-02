@@ -1,6 +1,5 @@
 services:
-  - type: web
+  - type: static
     name: yunuki-front
-    env: static
     publishPath: dist/yunuki-front
     buildCommand: npm run build
