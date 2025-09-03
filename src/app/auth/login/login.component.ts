@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user.interface';
 import { Yunuki } from '../../interfaces/yunuki.interface';
+import { LoadingService } from '../../services/loading.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   error = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe({
@@ -39,18 +40,19 @@ export class LoginComponent implements OnInit {
   onSubmit(form: any) {
     if (form.valid && !this.loading) {
       this.loading = true;
+      this.loadingService.show();
       this.error = '';
       this.username = form.value.username;
       this.password = form.value.password;
-      console.log('Formulario', form.value);
       this.authService.login(this.username, this.password).subscribe({
         next: (response) => {
+          this.loadingService.hide();
           this.loading = false;
-          console.log('Éxito', response.access_token);
           this.router.navigate(['/create']);
         },
         error: (err) => {
           this.loading = false;
+          this.loadingService.hide();
           this.error = 'Credenciales incorrectas';
           console.log('Error', err);
         }
