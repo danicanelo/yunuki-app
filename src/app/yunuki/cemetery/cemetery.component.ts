@@ -3,6 +3,7 @@ import { GraveComponent } from './grave/grave.component';
 import { YunukiService } from '../../services/yunuki.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Yunuki } from '../../interfaces/yunuki.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cemetery',
@@ -14,12 +15,15 @@ import { Yunuki } from '../../interfaces/yunuki.interface';
 export class CemeteryComponent implements OnInit {
   deadYunukis: Yunuki[] = [];
 
-  constructor(private yunukiService: YunukiService) { }
+  constructor(private yunukiService: YunukiService, private router: Router) { }
 
   ngOnInit(): void {
     this.yunukiService.getDeadYunukis().subscribe({
       next: (deadYunukis: Yunuki[]) => {
         this.deadYunukis = deadYunukis;
+        if (this.deadYunukis.length === 0) {
+          this.router.navigate(['/yunuki']);
+        }
       }
     });
 
