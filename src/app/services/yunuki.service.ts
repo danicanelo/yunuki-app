@@ -4,13 +4,12 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Breed } from '../interfaces/breed.interface';
 import { Yunuki } from '../interfaces/yunuki.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YunukiService {
-
-  private readonly apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -23,43 +22,43 @@ export class YunukiService {
   }
 
   getBreeds(): Observable<Breed[]> {
-    return this.http.get<Breed[]>(`${this.apiUrl}/breed/get`, {
+    return this.http.get<Breed[]>(`${environment.apiUrl}/breed/get`, {
       headers: this.getHeaders()
     });
   }
 
   createYunuki(name: string, breed: number): Observable<Yunuki> {
-    return this.http.post<Yunuki>(`${this.apiUrl}/yunukis/create`, { name, breed }, {
+    return this.http.post<Yunuki>(`${environment.apiUrl}/yunukis/create`, { name, breed }, {
       headers: this.getHeaders()
     });
   }
 
   getAliveYunuki(): Observable<Yunuki> {
-    return this.http.get<Yunuki>(`${this.apiUrl}/yunukis/get`, {
+    return this.http.get<Yunuki>(`${environment.apiUrl}/yunukis/get`, {
       headers: this.getHeaders()
     });
   }
 
   getDeadYunukis(): Observable<Yunuki[]> {
-    return this.http.get<Yunuki[]>(`${this.apiUrl}/yunukis/get-dead`, {
+    return this.http.get<Yunuki[]>(`${environment.apiUrl}/yunukis/get-dead`, {
       headers: this.getHeaders()
     });
   }
 
   feedYunuki(): Observable<Yunuki> {
-    return this.http.put<Yunuki>(`${this.apiUrl}/yunukis/feed`, {}, {
+    return this.http.put<Yunuki>(`${environment.apiUrl}/yunukis/feed`, {}, {
       headers: this.getHeaders()
     });
   }
 
   cleanYunuki(): Observable<Yunuki> {
-    return this.http.put<Yunuki>(`${this.apiUrl}/yunukis/clean`, {}, {
+    return this.http.put<Yunuki>(`${environment.apiUrl}/yunukis/clean`, {}, {
       headers: this.getHeaders()
     });
   }
 
   sleepYunuki(): Observable<Yunuki> {
-    return this.http.put<Yunuki>(`${this.apiUrl}/yunukis/sleep`, {}, {
+    return this.http.put<Yunuki>(`${environment.apiUrl}/yunukis/sleep`, {}, {
       headers: this.getHeaders()
     });
   }

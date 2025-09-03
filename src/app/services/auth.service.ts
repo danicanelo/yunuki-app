@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '../interfaces/user.interface';
+import { environment } from '../../environments/environment';
 
 
 
@@ -15,7 +16,6 @@ export interface LoginResponse {
 })
 
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -24,7 +24,7 @@ export class AuthService {
     if (!token) {
       return throwError(() => new Error('No token found'));
     }
-    return this.http.get<User>(`${this.apiUrl}/users/me`, {
+    return this.http.get<User>(`${environment.apiUrl}/users/me`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, { username, password }).pipe(tap(res => {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, { username, password }).pipe(tap(res => {
       localStorage.setItem('access_token', res.access_token);
     }),
       catchError(error => {
@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/users/register`, { username, email, password }).pipe(
+    return this.http.post(`${environment.apiUrl}/users/register`, { username, email, password }).pipe(
       tap(() => {
         this.router.navigate(['/auth/login']);
       }),
