@@ -52,8 +52,8 @@ export class AuthService {
       }))
   }
 
-  register(username: string, email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}/users/register`, { username, email, password }).pipe(
+  register(username: string, password: string) {
+    return this.http.post(`${environment.apiUrl}/users/register`, { username, password }).pipe(
       tap(() => {
         this.router.navigate(['/auth/login']);
       }),
@@ -67,9 +67,9 @@ export class AuthService {
             const errors = error.error.message;
             const fieldErrors: any = {};
             errors.forEach((err: string) => {
-              if (err.includes('correo')) {
-                fieldErrors.email = err;
-              }
+              // if (err.includes('correo')) {
+              //   fieldErrors.email = err;
+              // }
               if (err.includes('contraseña')) {
                 fieldErrors.password = err;
               }

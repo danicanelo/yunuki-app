@@ -16,17 +16,17 @@ export class RegisterComponent implements OnInit {
   error = '';
   errors = {};
   username = '';
-  email = '';
+  // email = '';
   password = '';
-  errorEmail = '';
+  // errorEmail = '';
   errorPassword = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/yunuki']);
-    }
+    // if (this.authService.isAuthenticated()) {
+    //   this.router.navigate(['/yunuki']);
+    // }
   }
 
   onSubmit(form: any) {
@@ -34,9 +34,9 @@ export class RegisterComponent implements OnInit {
       this.loading = true;
       this.error = '';
       this.username = form.value.username;
-      this.email = form.value.email;
+      // this.email = form.value.email;
       this.password = form.value.password;
-      this.authService.register(this.username, this.email, this.password).subscribe({
+      this.authService.register(this.username, this.password).subscribe({
         next: () => {
           this.loading = false;
           this.router.navigate(['/auth/login']);
@@ -44,11 +44,11 @@ export class RegisterComponent implements OnInit {
         error: (err) => {
           this.loading = false;
           if (err.hasOwnProperty('email') || err.hasOwnProperty('password')) {
-            this.errorEmail = err.email || '';
+            // this.errorEmail = err.email || '';
             this.errorPassword = err.password || '';
           } else {
             this.error = err;
-            this.errorEmail = '';
+            // this.errorEmail = '';
             this.errorPassword = '';
           }
         }
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
   clearError(): void {
     this.error = '';
-    this.errorEmail = '';
+    // this.errorEmail = '';
     this.errorPassword = '';
   }
 }
