@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Breed } from '../../interfaces/breed.interface';
 import { Yunuki } from '../../interfaces/yunuki.interface';
 import { User } from '../../interfaces/user.interface';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-create-yunuki',
@@ -24,29 +25,36 @@ export class CreateYunukiComponent implements OnInit {
     breed: 1
   };
 
-  constructor(private authService: AuthService, private yunukiService: YunukiService, private router: Router) { }
+  constructor(private authService: AuthService, private yunukiService: YunukiService, private router: Router, private loadingService: LoadingService) { }
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.authService.getUser().subscribe((user: User) => {
       this.username = user.username;
       user.yunukis?.forEach((yunuki: Yunuki) => {
         if (!yunuki.dead) {
+          this.loadingService.hide();
           this.router.navigate(['/yunuki']);
         }
       });
     }, (error) => {
+      this.loadingService.hide();
       console.error('Error fetching user:', error);
     });
 
     this.yunukiService.getBreeds().subscribe((breeds) => {
       this.breeds = breeds;
+      this.loadingService.hide();
     })
   }
 
   handleSubmit() {
+    this.loadingService.show();
     this.yunukiService.createYunuki(this.createValues.yunukiName, this.createValues.breed).subscribe((result) => {
+      this.loadingService.hide();
       this.router.navigate(['/yunuki']);
     }, (error) => {
+      this.loadingService.hide();
       console.error('Error creating Yunuki:', error);
     })
   }

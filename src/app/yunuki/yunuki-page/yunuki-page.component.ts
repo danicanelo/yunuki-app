@@ -6,6 +6,7 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { YunukiComponent } from './yunuki/yunuki.component';
 import { Yunuki } from '../../interfaces/yunuki.interface';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-yunuki-page',
@@ -20,9 +21,10 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
   modalOpen = false;
   action = '';
 
-  constructor(private yunukiService: YunukiService, private authService: AuthService, private router: Router) { }
+  constructor(private yunukiService: YunukiService, private authService: AuthService, private router: Router, private loadingService: LoadingService) { }
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.initializeYunuki();
   }
 
@@ -35,11 +37,25 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
   private initializeYunuki(): void {
     this.fetchYunukiData();
     this.fetchInterval = setInterval(() => {
-      this.fetchYunukiData();
+      this.fetchYunukiDataRecursively();
     }, 20000);
   }
 
   private fetchYunukiData(): void {
+    this.yunukiService.getAliveYunuki().subscribe({
+      next: (yunuki) => {
+        this.yunuki = yunuki;
+        this.loadingService.hide();
+      },
+      error: (err) => {
+        console.error('Error fetching Yunuki data:', err);
+        this.loadingService.hide();
+        this.router.navigate(['/create-yunuki']);
+      }
+    })
+  }
+
+  private fetchYunukiDataRecursively(): void {
     this.yunukiService.getAliveYunuki().subscribe({
       next: (yunuki) => {
         this.yunuki = yunuki;
@@ -53,6 +69,7 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
   }
 
   feedYunuki(): void {
+    this.loadingService.show();
     if (this.yunuki.hunger === 0) {
       this.action = 'no tiene hambre';
     } else if (this.yunuki.hunger > 0) {
@@ -62,15 +79,18 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
     this.yunukiService.feedYunuki().subscribe({
       next: (feededYunuki) => {
         this.yunuki = feededYunuki;
+        this.loadingService.hide();
         this.modalOpen = true;
       },
       error: (err) => {
+        this.loadingService.hide();
         console.error('Error fetching Yunuki data:', err);
       }
     })
   }
 
   cleanYunuki(): void {
+    this.loadingService.show();
     if (this.yunuki.dirt === 0) {
       this.action = 'no necesita bañarse';
     } else if (this.yunuki.dirt > 0) {
@@ -80,15 +100,18 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
     this.yunukiService.cleanYunuki().subscribe({
       next: (cleanedYunuki) => {
         this.yunuki = cleanedYunuki;
+        this.loadingService.hide();
         this.modalOpen = true;
       },
       error: (err) => {
+        this.loadingService.hide();
         console.error('Error fetching Yunuki data:', err);
       }
     })
   }
 
   sleepYunuki(): void {
+    this.loadingService.show();
     if (this.yunuki.tiredness === 0) {
       this.action = 'no necesita dormir';
     } else if (this.yunuki.tiredness > 0) {
@@ -98,9 +121,11 @@ export class YunukiPageComponent implements OnInit, OnDestroy {
     this.yunukiService.sleepYunuki().subscribe({
       next: (sleptYunuki) => {
         this.yunuki = sleptYunuki;
+        this.loadingService.hide();
         this.modalOpen = true;
       },
       error: (err) => {
+        this.loadingService.hide();
         console.error('Error fetching Yunuki data:', err);
       }
     })
